@@ -63,6 +63,23 @@ can be changed with `--output_csv`, `--snr_summary_csv`, `--subject_snr_csv`,
 `--srt_csv`, `--scatter_plot`, `--srt_scatter_plot`, `--agreement_csv`, and
 `--noninferiority_csv`.
 
+### Split Mandarin answers into scoring words
+
+The test pages make one score button per space-separated piece of an answer,
+so Mandarin answers need a space between words. `segment_mandarin.py` splits a
+transcript CSV's answers into words (jieba, with particles such as 的/了/吧
+joined to the word before them, as in the hand-split AzBio Mandarin lists),
+keeps every other column unchanged, and writes a review CSV for a native
+speaker to check. Answers with `/` alternatives are left as they are.
+
+```bash
+# How close is the method to the hand-split AzBio lists?
+python3 segment_mandarin.py --input metadata/azbio_mandarin_transcript.csv --evaluate
+# Split a list; check the review CSV before replacing the original.
+python3 segment_mandarin.py --input new_list.csv --output new_list_split.csv \
+    --review new_list_review.csv
+```
+
 Deploy server and detach process from the appropriate folder path.
 ```bash
 conda activate quicksin # Or whatever environment you use
