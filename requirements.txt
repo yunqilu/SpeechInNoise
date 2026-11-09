@@ -1,6 +1,7 @@
 # might need to run this first 
 #  conda install -c conda-forge numba
 absl-py
+jieba
 Flask
 openai-whisper
 #OpenAI-whisper @ git+https://github.com/openai/whisper.git
